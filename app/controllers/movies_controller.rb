@@ -15,8 +15,12 @@ class MoviesController < ApplicationController
     plot: params["plot"],
     director: params["director"],
     english: params["english"])
-    movies.save
-    render json: movies.as_json
+    if movies.save
+      render json: movies.as_json
+    else
+      render json: {errors: movies.errors.full_message},
+      status: 422 
+    end
   end
   def update
     movies_id = params["id"]
@@ -26,8 +30,11 @@ class MoviesController < ApplicationController
     movies.plot = params["plot"] || movies.plot
     movies.director = params["director"] || movies.director
     movies.english = params["english"] || movies.english
-    movies.save
-    render json: movies.as_json
+    if  movies.save
+      render json: movies.as_json
+    else 
+      render json: {errors: movies.errors.full_message},
+      status: 422 
   end
   def delete
     movies_id = params["id"]
