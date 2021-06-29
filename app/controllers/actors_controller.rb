@@ -1,7 +1,7 @@
 class ActorsController < ApplicationController
   def index 
-    actors = Actor.all.order(age: :desc)
-    render json: actors.as_json
+    actors = Actor.all
+    render json: actors
   end
   def create
     actors = Actor.new(
@@ -9,10 +9,10 @@ class ActorsController < ApplicationController
    last_name:  params["last_name"],
     known_for: params["known_for"],
     actor_age: params["actor_age"],
-    actor_gender: params["actor_gender"])
-    movie_id: params["movie_id"]
+    actor_gender: params["actor_gender"],
+    movie_id: params["movie_id"])
     actors.save
-    render json: actors.as_json
+    render json: actors
   end
   def update
     actors_id = params["id"]
@@ -24,7 +24,7 @@ class ActorsController < ApplicationController
     actors.actor_gender = params["actor_gender"] || actors.actor_gender
     actors.movie_id =params["movie_id"] || actors.movie_id
     actors.save
-    render json: actors.as_json     
+    render json: actors     
   end
 end
 
