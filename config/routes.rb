@@ -5,4 +5,8 @@ Rails.application.routes.draw do
   patch "movies/:id",controller: "movies",action: "update"
   delete "movies/:id",controller: "movies",action: "destroy"
   get "/actors",controller: "actors",action: "index"
+
+  post "/users" => "users#create"
+  post "/sessions" => "sessions#create"
+
 end
