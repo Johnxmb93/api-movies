@@ -1,7 +1,7 @@
 class MoviesController < ApplicationController
   before_action :authenticate_admin, except: [:index, :show]
   def index
-    movies = Movie.where(english: true )
+    movies = Movie.all
     render json: movies.as_json
   end
   def show
@@ -36,6 +36,7 @@ class MoviesController < ApplicationController
     else 
       render json: {errors: movies.errors.full_message},
       status: 422 
+    end
   end
   def delete
     movies_id = params["id"]
